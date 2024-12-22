@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Admin Page</h1>
+  <p>Only accessible to users with the "ADMIN" role.</p>
+  <p sec:authentication="name">Hello, <span sec:authentication="principal.username"></span>!</p>  <!-- Display username -->
+  <a th:href="@{/logout}" class="btn btn-secondary">Logout</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
+    <!-- Отступ слева для логотипа -->
+    <a class="navbar-brand ml-3" href="#">Кинотеатр</a> <!-- ml-3 добавляет отступ слева -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mx-auto"> <!-- Центрируем элементы списка -->
+            <li class="nav-item">
+                <a class="nav-link" href="/">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/films">Поиск фильмов</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/halls">Поиск зала</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mySession/list">Поиск сеанса</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/reviews">Отзывы</a>
+            </li>
+            <li class="nav-item">
+                <a id="myTicketsLink" class="nav-link" href="/ticket/user/1">Мои билеты</a>
+            </li>
+<!--F-->
+            <li class="nav-item" sec:authorize="hasRole('USER')">
+                <a class="nav-link" href="/films/topByRating">Топ фильмов</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-item nav-link text-dark" href="/admin/films">Добавить фильм</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-item nav-link text-dark" href="/admin/halls/create">Добавить зал</a>
+            </li><li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-item nav-link text-dark" href="/admin/mySession/create">Создать сеанс</a>
+            </li>
+<!--            <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">-->
+<!--                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"-->
+<!--                   aria-haspopup="true" aria-expanded="false">-->
+<!--                    Админ-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">-->
+<!--                    <a class="dropdown-item" href="/admin/halls">Добавить зал</a>-->
+<!--                    <a class="dropdown-item" href="/admin/mySession">Создать сеанс</a>-->
+<!--                </div>-->
+<!--            </li>-->
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-item nav-link text-dark text-info" href="/users/profile"><th:block sec:authentication="name"></th:block></a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <form th:method="post" th:action="@{/users/logout}">
+                    <input class="btn btn-link nav-link" type="submit" value="Logout">
+                </form>
+            </li>
+
+            <!-- Отступ справа для элементов входа и регистрации -->
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-item nav-link text-dark mr-3" th:href="@{/users/register}">Регистрация</a> <!-- mr-3 добавляет отступ справа -->
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-item nav-link text-dark mr-3" th:href="@{/users/login}">Вход</a> <!-- mr-3 добавляет отступ справа -->
+            </li>
+        </ul>
+    </div>
+</nav>

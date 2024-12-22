@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/navbar}">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Добавить зал</h1>
+                </div>
+                <form th:action="@{/admin/halls/create}"
+                      th:method="post"
+                      th:object="${form}"
+                      class="m-md-auto w-50 pb-3">
+                    <div class="mb-3">
+                        <label class="form-label" for="capacity">Вместимость</label>
+                        <input th:field="*{capacity}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               min ="0"
+                               class="form-control text-center"
+                               id="capacity"/>
+                        <small th:if="${#fields.hasErrors('capacity')}"
+                               th:errors="*{capacity}"
+                               class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="hallNumber">Номер зала</label>
+                        <input th:field="*{hallNumber}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               min="0"
+                               class="form-control text-center"
+                               id="hallNumber"/>
+                        <small th:if="${#fields.hasErrors('hallNumber')}"
+                               th:errors="*{hallNumber}"
+                               class="text-danger">Error message</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer}"></div>
+</body>
+</html>

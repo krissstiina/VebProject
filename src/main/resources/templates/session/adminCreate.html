@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/navbar}">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <h1>Добавить сеанс</h1>
+                <form th:action="@{/admin/mySession/create}" method="post" th:object="${form}" class="m-md-auto w-50 pb-3">
+                    <!-- Поле для даты -->
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Дата сеанса:</label>
+                        <!-- Используем input с type="date" для выбора даты -->
+                        <input type="date" th:field="*{date}" class="form-control" id="date" required />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+                    </div>
+
+                    <!-- Поле для времени -->
+                    <div class="mb-3">
+                        <label for="time" class="form-label">Время сеанса:</label>
+                        <!-- Используем input с type="time" для выбора времени -->
+                        <input type="time" th:field="*{time}" class="form-control" id="time" required />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="filmId" class="form-label">Фильм:</label>
+                        <select th:field="*{filmId}" class="form-select" id="filmId" required>
+                            <option value="">Выберите фильм</option>
+                            <option th:each="film : ${films}" th:value="${film.id}" th:text="${film.name}"></option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('filmId')}" th:errors="*{filmId}"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="hallId" class="form-label">Зал:</label>
+                        <select th:field="*{hallId}" class="form-select" id="hallId" required>
+                            <option value="">Выберите зал</option>
+                            <option th:each="hall : ${halls}" th:value="${hall.id}"
+                                    th:text="${hall.hallNumber + ' (' + hall.capacity + ')'}"></option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('hallId')}" th:errors="*{hallId}"></div>
+                    </div>
+
+                    <!-- Поле для цены -->
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Цена:</label>
+                        <input type="number" th:field="*{price}" class="form-control" id="price" required/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                    </div>
+
+                    <!-- Поле для вместимости -->
+                    <div class="mb-3">
+                        <label for="availableSeats" class="form-label">Вместимость:</label>
+                        <input type="number" th:field="*{availableSeats}" class="form-control" id="availableSeats" required min="1" />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('availableSeats')}" th:errors="*{availableSeats}"></div>
+                    </div>
+
+                    <!-- Кнопка отправки формы -->
+                    <button type="submit" class="btn btn-primary">Добавить сеанс</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

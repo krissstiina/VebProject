@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head">
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+    .jumbotron {
+      background-size: cover;
+      color: #fff;
+      padding: 80px 20px;
+      border-radius: 15px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+    .jumbotron h1 {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+    .container {
+      margin-top: 30px;
+    }
+    footer {
+      background-color: #111;
+      padding: 20px 0;
+      text-align: center;
+      color: #ddd;
+    }
+    footer a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+        <h1>Кинотеатр</h1>
+        <div>
+          <span th:text="${#dates.createNow()}"></span>
+        </div>
+        <p>Добро пожаловать в наш кинотеатр! Здесь вы можете наслаждаться просмотром самых свежих фильмов в уютной и стильной атмосфере.</p>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="fragments/footer">
+  <p>Кинотеатр «Империя» | Все права защищены</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Изменить отзыв</h1>
+                </div>
+                <form th:action="@{/reviews/{id}/edit(id=${form.id})}"
+                      th:method="post"
+                      th:object="${form}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <input th:field="*{id}" type="hidden" class="form-control text-center" id="id"/>
+                    <input th:field="*{userId}" type="hidden" class="form-control text-center" id="userId"/>
+                    <input th:field="*{filmId}" type="hidden" class="form-control text-center" id="filmId"/>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="review">Отзыв</label>
+                        <textarea th:field="*{review}" th:errorclass="is-invalid" class="form-control text-center" id="review" rows="5"></textarea>
+                        <small th:if="${#fields.hasErrors('review')}" th:errors="*{review}" class="text-danger">Error message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Рейтинг:</label>
+                        <div class="rating">
+                            <input type="radio" id="star1" name="rating" value="5" th:field="*{rating}" required />
+                            <label for="star1" title="5 star">☆</label>
+
+                            <input type="radio" id="star2" name="rating" value="4" th:field="*{rating}" required />
+                            <label for="star2" title="4 star">☆</label>
+
+                            <input type="radio" id="star3" name="rating" value="3" th:field="*{rating}" required />
+                            <label for="star3" title="3 star">☆</label>
+
+                            <input type="radio" id="star4" name="rating" value="2" th:field="*{rating}" required />
+                            <label for="star4" title="2 star">☆</label>
+
+                            <input type="radio" id="star5" name="rating" value="1" th:field="*{rating}" required />
+                            <label for="star5" title="1 star">☆</label>
+                        </div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+                    </div>
+
+                    <style>
+                        .rating {
+                            direction: rtl; /* Отображение звезд справа налево */
+                        }
+
+                        .rating input {
+                            display: none; /* Скрыть радиокнопки */
+                        }
+
+                        .rating label {
+                            font-size: 30px; /* Размер звезд */
+                            color: lightgray; /* Цвет звезд по умолчанию */
+                            cursor: pointer;
+                        }
+
+                        .rating input:checked ~ label {
+                            color: gold; /* Цвет звезд при выборе */
+                        }
+
+                        .rating label:hover,
+                        .rating label:hover ~ label {
+                            color: gold; /* Цвет звезд при наведении */
+                        }
+                    </style>
+
+                    <button type="submit" class="btn btn-secondary">Изменить отзыв</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

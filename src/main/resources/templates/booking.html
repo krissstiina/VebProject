@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${model.title}">Бронирование места</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .no-seats-available {
+            color: #dc3545; /* Bootstrap's danger color */
+            font-weight: bold;
+            margin-bottom: 1rem; /* Add some margin below */
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/navbar">Navbar</div>
+
+<div class="container">
+    <h1 th:text="${model.title}">Бронирование места</h1>
+
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <div th:if="${mySession}">
+        <h2>Информация о сеансе</h2>
+        <p>ID: <span th:text="${mySession.id}">ID</span></p>
+        <p>Дата: <span th:text="${mySession.date}">Дата</span></p>
+        <p>Фильм ID: <span th:text="${mySession.filmId}">Фильм ID</span></p>
+        <p>Зал ID: <span th:text="${mySession.hallId}">Зал ID</span></p>
+        <p>Цена: <span th:text="${mySession.price}">Цена</span> руб.</p>
+        <p>Доступных мест: <span th:text="${mySession.availableSeats}">Места</span></p>
+
+        <!-- Скрытое поле с датой сеанса в формате yyyy-MM-dd -->
+        <input type="hidden" id="sessionDate" th:value="${mySession.date}">
+
+        <div th:if="${mySession.availableSeats > 0}">
+            <form th:action="@{/mySession/{sessionId}/book(sessionId=${mySession.id})}" method="post">
+                <input type="hidden" name="sessionId" th:value="${mySession.id}" />
+                <button type="submit" class="btn btn-primary" id="bookButton">Забронировать</button>
+            </form>
+        </div>
+
+        <div th:unless="${mySession.availableSeats > 0}">
+            <p class="no-seats-available">К сожалению, мест на этот сеанс нет.</p>
+            <a class="btn btn-secondary" th:href="@{/mySession/list}">Посмотреть другие сеансы</a>
+        </div>
+
+        <!-- Кнопка для отмены бронирования, если пользователь уже забронировал место -->
+        <div th:if="${mySession.userHasTicket}">
+            <form th:action="@{/mySession/{sessionId}/cancel(sessionId=${mySession.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Отменить бронирование</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Получаем дату сеанса из скрытого поля
+    const sessionDate = document.getElementById('sessionDate').value;
+
+    // Преобразуем строку в дату
+    const sessionDateObj = new Date(sessionDate);
+
+    // Получаем текущую дату
+    const currentDate = new Date();
+
+    // Проверяем, если дата сеанса прошла
+    if (sessionDateObj < currentDate) {
+        // Отключаем кнопку бронирования
+        document.getElementById('bookButton').disabled = true;
+
+        // Показываем сообщение об ошибке
+        const errorMessage = document.createElement('p');
+        errorMessage.classList.add('alert', 'alert-danger');
+        errorMessage.innerText = 'Бронирование невозможно, так как сеанс уже прошел.';
+        document.querySelector('.container').appendChild(errorMessage);
+    }
+</script>
+
+</body>
+</html>

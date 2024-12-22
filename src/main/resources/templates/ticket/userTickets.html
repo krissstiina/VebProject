@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head th:replace="~{fragments/head}"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/navbar}">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <h1>Ваши Забронированные Билеты</h1>
+
+                <div th:if="${tickets != null}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th hidden>ID Билета</th>
+                            <th>Цена</th>
+                            <th>Пользователь</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ticket : ${tickets}">
+                            <td hidden th:text="${ticket.id}">1</td> <!-- Скрытый столбец для ID Билета -->
+                            <td th:text="${ticket.session.price}">Цена</td> <!-- Цена сеанса -->
+                            <td th:text="${ticket.user.name}">Имя Пользователя</td> <!-- Имя пользователя -->
+                            <td th:text="${ticket.session.date}">Дата</td> <!-- Дата сеанса -->
+                            <td th:text="${ticket.session.time != null ? ticket.session.time : 'Не указано'}">Время</td> <!-- Время сеанса -->
+                            <td>
+                                <form th:action="@{/ticket/cancel/{ticketId}(ticketId=${ticket.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger">Отменить бронирование</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${tickets == null || #lists.isEmpty(tickets)}">
+                    <p>У вас нет забронированных билетов.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/footer}"/>
+</body>
+</html>

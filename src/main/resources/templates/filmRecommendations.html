@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендации фильмов</title>
+</head>
+<body>
+<h1>Рекомендации для вас</h1>
+
+<div th:if="${recommendedFilms != null and !#lists.isEmpty(recommendedFilms)}">
+    <h2>Топ рекомендуемых фильмов</h2>
+    <ul>
+        <li th:each="film : ${recommendedFilms}">
+            <h3 th:text="${film.name}">Название фильма</h3>
+            <p th:text="'Жанр: ' + ${film.genre}">Жанр фильма</p>
+            <p th:text="'Рейтинг: ' + ${film.averageRating}">Рейтинг фильма</p>
+            <p th:text="'Год выпуска: ' + ${film.yearOfPublish}">Год выпуска</p>
+            <p th:text="'Режиссёр: ' + ${film.producer}">Режиссёр</p>
+        </li>
+    </ul>
+</div>
+
+<div th:if="${recommendedFilms == null or #lists.isEmpty(recommendedFilms)}">
+    <p>Извините, мы не можем предложить фильмы для вас.</p>
+</div>
+
+</body>
+</html>

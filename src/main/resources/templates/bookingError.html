@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking Error</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        h1 { color: #d9534f; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Booking Error</h1>
+    <p th:text="${error}"></p>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="~{fragments/navbar}">Navbar</div>
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+        <h2 class="text-center text-dark mt-5">Поиск отзывов</h2>
+
+        <!-- Форма поиска -->
+        <form th:action="@{/reviews}"
+              th:method="get"
+              th:object="${form}"
+              class="mb-3">
+          <div class="input-group">
+            <input type="text"
+                   th:field="*{searchTerm}"
+                   class="form-control"
+                   placeholder="Поиск по фильму"/>
+            <button class="btn btn-primary" type="submit">Поиск</button>
+          </div>
+        </form>
+
+        <!-- Кнопка добавить новый отзыв -->
+        <div class="mt-4 mb-3">
+          <a class="btn btn-success" th:href="@{/reviews/create}">Добавить новый отзыв</a>
+        </div>
+
+        <!-- Если отзывы не найдены -->
+        <div th:if="${#lists.isEmpty(model.review)}" class="alert alert-info">
+          Отзывы не найдены
+        </div>
+
+        <!-- Если отзывы есть -->
+        <div th:if="${not #lists.isEmpty(model.review)}">
+          <div th:each="review : ${model.review}"
+               class="d-flex flex-column bg-text mb-3 p-3 border rounded">
+            <h2 th:text="'Имя пользователя: ' + ${review.userName}">Имя пользователя</h2>
+            <h4 th:text="'Фильм: ' + ${review.filmName}">Фильм</h4>
+            <h4 th:text="'Отзыв: ' + ${review.review}">Номер зала</h4>
+            <h4 th:text="'Рейтинг: ' + ${review.rating}">Отзыв</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="~{fragments/footer}"/>
+</body>
+</html>

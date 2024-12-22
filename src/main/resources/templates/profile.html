@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<!-- Навигационная панель -->
+<div th:replace="fragments/navbar">Navbar</div>
+
+<main class="flex-shrink-0">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="jumbotron text-center rounded shadow-lg p-5">
+                    <h1 class="display-4">Profile</h1>
+                    <div class="bg-light rounded p-4 shadow-sm">
+                        <h2 class="mb-4">User Information</h2>
+
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Почта:</strong>
+                                <span th:text="${user.email}"></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Имя:</strong>
+                                <span th:text="${user.name}"></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Фамилия:</strong>
+                                <span th:text="${user.surname}"></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Отчество:</strong>
+                                <span th:text="${user.middleName}"></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Номер телефона:</strong>
+                                <span th:text="${user.phoneNumber}"></span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Возраст:</strong>
+                                <span th:text="${user.age}"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
