@@ -122,34 +122,27 @@ public class SessionServiceImpl implements SessionService {
     @Override
     @Cacheable(value = CACHE_KEY)
     public List<SessionDto> getTop3MostPurchasedSessions() {
-        // Получаем все сессии из репозитория
         List<MySession> sessions = sessionRepository.findAll();
 
-        // Карта для подсчета количества билетов по каждой сессии
         Map<MySession, Long> sessionTicketCountMap = new HashMap<>();
 
-        // Подсчитываем количество билетов для каждой сессии
         for (MySession session : sessions) {
             long ticketCount = countBySession(session);
             sessionTicketCountMap.put(session, ticketCount);
         }
 
-        // Форматеры для даты и времени
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Сортируем по количеству билетов и преобразуем в DTO
         return sessionTicketCountMap.entrySet().stream()
-                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())) // Сортируем по убыванию количества билетов
-                .limit(3) // Оставляем только 3 самых популярных сессии
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .limit(3)
                 .map(entry -> {
                     MySession session = entry.getKey();
 
-                    // Форматируем дату и время
                     String formattedDate = session.getDate().format(dateFormatter);
                     String formattedTime = session.getTime().format(timeFormatter);
 
-                    // Возвращаем DTO с нужными данными
                     return new SessionDto(
                             session.getId(),
                             formattedDate,
@@ -160,7 +153,7 @@ public class SessionServiceImpl implements SessionService {
                             formattedTime
                     );
                 })
-                .collect(Collectors.toList()); // Собираем результат в список
+                .collect(Collectors.toList());
     }
 
     private long countBySession(MySession session) {

@@ -40,7 +40,7 @@ public class TicketControllerImpl implements TicketController {
     @GetMapping("/user/{userId}")
     public String showUserTickets(Model model) {
         List<Ticket> tickets = ticketService.findByCurrentUser();
-        model.addAttribute("tickets", tickets); // Исправлено имя атрибута
+        model.addAttribute("tickets", tickets);
         return "ticket/userTickets";
     }
 
@@ -55,7 +55,7 @@ public class TicketControllerImpl implements TicketController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Произошла непредвиденная ошибка: " + e.getMessage());
         }
-        return "redirect:/mySession/list"; // Перенаправление на страницу с билетами пользователя
+        return "redirect:/mySession/list";
     }
 
 

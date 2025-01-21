@@ -10,7 +10,6 @@
       <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
         <h2 class="text-center text-dark mt-5">Поиск отзывов</h2>
 
-        <!-- Форма поиска -->
         <form th:action="@{/reviews}"
               th:method="get"
               th:object="${form}"
@@ -24,17 +23,14 @@
           </div>
         </form>
 
-        <!-- Кнопка добавить новый отзыв -->
         <div class="mt-4 mb-3">
           <a class="btn btn-success" th:href="@{/reviews/create}">Добавить новый отзыв</a>
         </div>
 
-        <!-- Если отзывы не найдены -->
         <div th:if="${#lists.isEmpty(model.review)}" class="alert alert-info">
           Отзывы не найдены
         </div>
 
-        <!-- Если отзывы есть -->
         <div th:if="${not #lists.isEmpty(model.review)}">
           <div th:each="review : ${model.review}"
                class="d-flex flex-column bg-text mb-3 p-3 border rounded">

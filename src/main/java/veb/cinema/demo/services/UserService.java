@@ -1,10 +1,7 @@
 package veb.cinema.demo.services;
 
-
-import org.springframework.security.core.Authentication;
 import veb.cinema.demo.dto.UserDto;
 import veb.cinema.demo.dto.UserProfileDto;
-import veb.cinema.demo.models.User;
 
 import java.util.List;
 import java.util.Optional;

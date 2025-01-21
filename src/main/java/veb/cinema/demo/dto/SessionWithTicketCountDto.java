@@ -10,7 +10,6 @@ public class SessionWithTicketCountDto {
     private int availableSeats;
     private long ticketCount;
 
-    // Constructor
     public SessionWithTicketCountDto(long sessionId, String filmName, String sessionDate,
                                      String sessionTime, int hallNumber, int price,
                                      int availableSeats, long ticketCount) {
@@ -24,7 +23,6 @@ public class SessionWithTicketCountDto {
         this.ticketCount = ticketCount;
     }
 
-    // Getters and Setters
     public long getSessionId() {
         return sessionId;
     }

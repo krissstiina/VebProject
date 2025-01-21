@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import veb.cinema.demo.dto.UserDto;
 import veb.cinema.demo.dto.UserProfileDto;
@@ -52,15 +51,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Cacheable(value =CACHE_KEY)
     public UserProfileDto getUserProfile(String username) {
-        // Находим пользователя по email (или другому уникальному полю)
         Optional<User> user = userRepository.findByEmail(username);
 
         if (user.isEmpty()) {
-            // Если пользователь не найден, выбрасываем исключение
             throw new UserNotFoundException();
         }
 
-        // Преобразуем сущность User в DTO
         User u = user.get();
         return new UserProfileDto(
                 u.getId(),

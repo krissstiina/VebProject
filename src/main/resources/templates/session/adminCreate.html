@@ -10,7 +10,6 @@
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
                 <h1>Добавить сеанс</h1>
                 <form th:action="@{/admin/mySession/create}" method="post" th:object="${form}" class="m-md-auto w-50 pb-3">
-                    <!-- Поле для даты -->
                     <div class="mb-3">
                         <label for="date" class="form-label">Дата сеанса:</label>
                         <!-- Используем input с type="date" для выбора даты -->
@@ -18,10 +17,8 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
                     </div>
 
-                    <!-- Поле для времени -->
                     <div class="mb-3">
                         <label for="time" class="form-label">Время сеанса:</label>
-                        <!-- Используем input с type="time" для выбора времени -->
                         <input type="time" th:field="*{time}" class="form-control" id="time" required />
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('time')}" th:errors="*{time}"></div>
                     </div>
@@ -46,21 +43,18 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('hallId')}" th:errors="*{hallId}"></div>
                     </div>
 
-                    <!-- Поле для цены -->
                     <div class="mb-3">
                         <label for="price" class="form-label">Цена:</label>
                         <input type="number" th:field="*{price}" class="form-control" id="price" required/>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
                     </div>
 
-                    <!-- Поле для вместимости -->
                     <div class="mb-3">
                         <label for="availableSeats" class="form-label">Вместимость:</label>
                         <input type="number" th:field="*{availableSeats}" class="form-control" id="availableSeats" required min="1" />
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('availableSeats')}" th:errors="*{availableSeats}"></div>
                     </div>
 
-                    <!-- Кнопка отправки формы -->
                     <button type="submit" class="btn btn-primary">Добавить сеанс</button>
                 </form>
             </div>

@@ -23,11 +23,11 @@
                         </thead>
                         <tbody>
                         <tr th:each="ticket : ${tickets}">
-                            <td hidden th:text="${ticket.id}">1</td> <!-- Скрытый столбец для ID Билета -->
-                            <td th:text="${ticket.session.price}">Цена</td> <!-- Цена сеанса -->
-                            <td th:text="${ticket.user.name}">Имя Пользователя</td> <!-- Имя пользователя -->
-                            <td th:text="${ticket.session.date}">Дата</td> <!-- Дата сеанса -->
-                            <td th:text="${ticket.session.time != null ? ticket.session.time : 'Не указано'}">Время</td> <!-- Время сеанса -->
+                            <td hidden th:text="${ticket.id}">1</td>
+                            <td th:text="${ticket.session.price}">Цена</td>
+                            <td th:text="${ticket.user.name}">Имя Пользователя</td>
+                            <td th:text="${ticket.session.date}">Дата</td>
+                            <td th:text="${ticket.session.time != null ? ticket.session.time : 'Не указано'}">Время</td>
                             <td>
                                 <form th:action="@{/ticket/cancel/{ticketId}(ticketId=${ticket.id})}" method="post">
                                     <button type="submit" class="btn btn-danger">Отменить бронирование</button>

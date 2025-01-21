@@ -17,10 +17,10 @@
             </thead>
             <tbody>
             <tr th:each="reviewData : ${reviews}">
-                <td th:text="${reviewData['review'].review}">Отзыв</td> <!-- Отзыв -->
-                <td th:text="${reviewData['review'].rating}">Рейтинг</td> <!-- Рейтинг -->
-                <td th:text="${reviewData['userName']}">Пользователь</td> <!-- Имя пользователя -->
-                <td th:text="${reviewData['review'].filmId}">Фильм</td> <!-- Фильм -->
+                <td th:text="${reviewData['review'].review}">Отзыв</td>
+                <td th:text="${reviewData['review'].rating}">Рейтинг</td>
+                <td th:text="${reviewData['userName']}">Пользователь</td>
+                <td th:text="${reviewData['review'].filmId}">Фильм</td>
             </tr>
             </tbody>
         </table>

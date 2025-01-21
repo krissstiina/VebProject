@@ -1,10 +1,8 @@
 package veb.cinema.demo.services;
 
-import java.security.Principal;
 import java.util.List;
 
 import veb.cinema.demo.dto.ReviewsDto;
-import veb.cinema.demo.dto.UserDto;
 import veb.cinema.demo.models.Reviews;
 
 public interface ReviewsService {

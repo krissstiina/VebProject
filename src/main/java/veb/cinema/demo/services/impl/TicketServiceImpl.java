@@ -108,30 +108,26 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public SessionWithTicketCountDto countBySession(SessionDto sessionDto) {
-        // Assuming you have a way to retrieve the full session entity from the SessionDto.
         MySession session = sessionRepository.findById(sessionDto.getId())
                 .orElseThrow(() -> new RuntimeException("Session not found"));
 
-        // Get the ticket count for the given session
         long ticketCount = ticketRepository.countBySession(session);
 
-        // Format the session details (assuming session.getDate() is LocalDate and session.getTime() is LocalTime)
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        String formattedDate = session.getDate().format(dateFormatter);  // Format the date
-        String formattedTime = session.getTime().format(timeFormatter);  // Format the time
+        String formattedDate = session.getDate().format(dateFormatter);
+        String formattedTime = session.getTime().format(timeFormatter);
 
-        // Create and return the DTO with all the session details and ticket count
         return new SessionWithTicketCountDto(
-                session.getId(),                        // sessionId
-                session.getFilm().getName(),            // filmName (assuming session.getFilm() returns a Film object)
-                formattedDate,                          // sessionDate (formatted)
-                formattedTime,                          // sessionTime (formatted)
-                session.getHall().getHallNumber(),      // hallNumber (assuming session.getHall() returns a Hall object)
-                session.getPrice(),                     // price
-                session.getAvailableSeats(),            // availableSeats
-                ticketCount                             // ticketCount
+                session.getId(),
+                session.getFilm().getName(),
+                formattedDate,
+                formattedTime,
+                session.getHall().getHallNumber(),
+                session.getPrice(),
+                session.getAvailableSeats(),
+                ticketCount
         );
     }
 

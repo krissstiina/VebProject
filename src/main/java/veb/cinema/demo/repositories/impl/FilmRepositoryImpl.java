@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import veb.cinema.demo.models.Films;
-import veb.cinema.demo.models.Reviews;
 import veb.cinema.demo.repositories.FilmRepository;
 
 import java.util.List;

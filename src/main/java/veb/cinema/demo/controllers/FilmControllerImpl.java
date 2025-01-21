@@ -17,9 +17,7 @@ import veb.cinema.demo.services.UserService;
 import viewModel.BaseViewModel;
 import viewModel.film.*;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller

@@ -175,46 +175,6 @@ public class ReviewsControllerImpl implements ReviewsController {
         return "redirect:/reviews";
     }
 
-//    @GetMapping("/{id}")
-//    public String listReview(@PathVariable("id") Integer id, Model model) {
-//        var viewModel = new ReviewsCreateViewModel(createBaseViewModel("Отзывы фильма"));
-//
-//        // Проверка на null, если нужно
-//        if (id == null) {
-//            return "redirect:/error";  // Или вернуть страницу с ошибкой
-//        }
-//
-//        // Получаем список отзывов для указанного фильма
-//        List<ReviewsDto> reviews = reviewsService.findAllByFilmId(id);
-//
-//        // Создаем список для передачи данных в шаблон, добавляем userName
-//        List<Map<String, Object>> reviewsWithUserName = new ArrayList<>();
-//
-//        for (ReviewsDto review : reviews) {
-//            // Получаем имя пользователя по userId
-//            String userName = userService.getUserNameById(review.getUserId());
-//
-//            // Получаем название фильма по filmId
-//            String filmName = filmService.getFilmNameById(review.getFilmId());
-//
-//            // Создаем карту для хранения данных (Review, UserName, FilmName)
-//            Map<String, Object> reviewData = new HashMap<>();
-//            reviewData.put("review", review);
-//            reviewData.put("userName", userName);
-//            reviewData.put("filmName", filmName);  // Добавляем название фильма
-//
-//            reviewsWithUserName.add(reviewData); // Добавляем данные в список
-//        }
-//
-//        // Добавляем данные в модель
-//        model.addAttribute("reviews", reviewsWithUserName);
-//        model.addAttribute("model", viewModel);
-//
-//        return "review/byId"; // Название шаблона Thymeleaf
-//    }
-
-
-
     @Override
     public BaseViewModel createBaseViewModel(String title) {
         return new BaseViewModel(title);
